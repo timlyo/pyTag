@@ -351,10 +351,9 @@ class Rater:
                 t.proper = True
                 t.rating = ratings[t]
         
-        # purge duplicates and one-character tags; get rid of stopwords and
-        # terms that occur only once
-        unique_tags = set(t for t, cnt in term_count.iteritems()
-                          if len(t.string) > 1 and t.rating > 0.0 and cnt > 1)
+        # purge duplicates, one-character tags and stopwords
+        unique_tags = set(t for t in term_count
+                          if len(t.string) > 1 and t.rating > 0.0)
         # remove redundant tags
         for t, cnt in term_count.iteritems():
             words = t.stem.split()
