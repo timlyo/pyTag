@@ -80,8 +80,9 @@ class NaiveRater(Rater):
 
     def __call__(self, tags):
         self.rate_tags(tags)
-        # we still get rid of one-character tags
-        unique_tags = set(t for t in tags if len(t.string) > 1)
+        # we still get rid of one-character tags and stopwords
+        unique_tags = set(t for t in tags
+                          if len(t.string) > 1 and t.rating > 0.0)
         return sorted(unique_tags)
     
         
