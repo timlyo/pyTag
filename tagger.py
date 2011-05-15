@@ -82,6 +82,8 @@ Example::
     ['the lounge lizards', 'jazz', 'john lurie', 'musical', 'albums']
 '''
 
+from __future__ import division
+
 import collections
 import re
 
@@ -346,7 +348,7 @@ class Rater:
                 
         for t, cnt in term_count.iteritems():
             t.string = clusters[t].most_common(1)[0][0]
-            proper_freq = proper[t] / float(cnt)
+            proper_freq = proper[t] / cnt
             if proper_freq >= 0.5:
                 t.proper = True
                 t.rating = ratings[t]
@@ -360,7 +362,7 @@ class Rater:
             for l in xrange(1, len(words)):
                 for i in xrange(len(words) - l + 1):
                     s = Tag(' '.join(words[i:i + l]))
-                    relative_freq = float(cnt) / term_count[s]
+                    relative_freq = cnt / term_count[s]
                     if ((relative_freq == 1.0 and t.proper) or
                         (relative_freq >= 0.5 and t.rating > 0.0)):
                         unique_tags.discard(s)
@@ -378,8 +380,7 @@ class Rater:
         
         for t in tags:
             # rating of a single tag is term frequency * weight
-            t.rating = float(term_count[t]) / len(tags) * \
-                self.weights.get(t.stem, 1.0)
+            t.rating = term_count[t] / len(tags) * self.weights.get(t.stem, 1.0)
     
     def create_multitags(self, tags):
         '''

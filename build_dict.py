@@ -25,9 +25,10 @@
 Usage: build_dict.py -o <output file> -s <stopwords file> <list of files>
 '''
 
+from __future__ import division
+
 from tagger import Stemmer
 from extras import SimpleReader
-
 
 def build_dict(corpus, stopwords=None, measure='IDF'):
     '''
@@ -50,14 +51,14 @@ def build_dict(corpus, stopwords=None, measure='IDF'):
         words = [w for doc in corpus for w in doc]
         
         term_count = collections.Counter(words)
-        total_count = float(len(words))
+        total_count = len(words)
         scale = math.log(total_count)
     
         for w, cnt in term_count.iteritems():
             dictionary[w] = math.log(total_count / (cnt + 1)) / scale
 
     elif measure == 'IDF':
-        corpus_size = float(len(corpus))
+        corpus_size = len(corpus)
         scale = math.log(corpus_size)
 
         term_count = collections.defaultdict(int)
