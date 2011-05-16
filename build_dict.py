@@ -82,10 +82,10 @@ def build_dict_from_files(output_file, corpus_files, stopwords_file=None,
                           reader=SimpleReader(), stemmer=Stemmer(),
                           measure='IDF', verbose=False):
     '''
-    @param output_file:    the binary stream where the dictionary should be
+    @param output_file:    the name of the file where the dictionary should be
                            saved
-    @param corpus_files:   a list of streams with words to process
-    @param stopwords_file: a stream containing a list of stopwords
+    @param corpus_files:   a list of files with words to process
+    @param stopwords_file: a file containing a list of stopwords
     @param reader:         the L{Reader} object to be used
     @param stemmer:        the L{Stemmer} object to be used
     @param measure:        the measure used to compute the weights ('IDF'
@@ -99,19 +99,22 @@ def build_dict_from_files(output_file, corpus_files, stopwords_file=None,
 
     if verbose: print 'Processing corpus...'
     corpus = []
-    for doc in corpus_files:
-        corpus.append(reader(doc.read()))
+    for filename in corpus_files:
+        with open(filename, 'r') as doc:
+            corpus.append(reader(doc.read()))
     corpus = [[w.stem for w in map(stemmer, doc)] for doc in corpus]
 
     stopwords = None
     if stopwords_file:
         if verbose: print 'Processing stopwords...'
-        stopwords = reader(stopwords_file.read())
+        with open(stopwords_file, 'r') as sw:
+            stopwords = reader(sw.read())
         stopwords = [w.stem for w in map(stemmer, stopwords)]
 
     if verbose: print 'Building dictionary... '
     dictionary = build_dict(corpus, stopwords, measure)
-    pickle.dump(dictionary, output_file, -1) 
+    with open(output_file, 'wb') as out:
+        pickle.dump(dictionary, out, -1) 
     
 
 if __name__ == '__main__':
@@ -127,17 +130,8 @@ if __name__ == '__main__':
     except:
         print __doc__
         exit(1)
-    
-    corpus = [open(doc, 'r') for doc in corpus]
-    stopwords_file = open(stopwords_file, 'r')
-    output_file = open(output_file, 'wb')
 
     build_dict_from_files(output_file, corpus, stopwords_file, verbose=True)
-
-    output_file.close()
-    stopwords_file.close()
-    for doc in corpus:
-        doc.close()
     
                
 
