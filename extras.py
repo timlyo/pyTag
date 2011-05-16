@@ -89,7 +89,8 @@ class NaiveRater(Rater):
 def build_dict_from_nltk(output_file, corpus=None, stopwords=None,
                          stemmer=Stemmer(), measure='IDF', verbose=False):
     '''
-    @param output_file: the binary stream where the dictionary should be saved
+    @param output_file: the name of the file where the dictionary should be
+                        saved
     @param corpus:      the NLTK corpus to use (defaults to nltk.corpus.reuters)
     @param stopwords:   a list of (not stemmed) stopwords (defaults to
                         nltk.corpus.reuters.words('stopwords'))
@@ -124,7 +125,8 @@ def build_dict_from_nltk(output_file, corpus=None, stopwords=None,
 
     if verbose: print 'Building dictionary... '
     dictionary = build_dict(corpus_list, stopwords, measure)
-    pickle.dump(dictionary, output_file, -1) 
+    with open(output_file, 'wb') as out:
+        pickle.dump(dictionary, out, -1) 
 
 
 
