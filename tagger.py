@@ -192,10 +192,10 @@ class Reader:
     different rules and formats other than plain text could be used)
     '''
 
-    match_apostrophes = re.compile('`|’')
-    match_paragraphs = re.compile('[\.\?!\t\n\r\f\v]+')
-    match_phrases = re.compile('[,;:\(\)\[\]\{\}<>]+')
-    match_words = re.compile('[\w\-\'_/&]+')
+    match_apostrophes = re.compile(r'`|’')
+    match_paragraphs = re.compile(r'[\.\?!\t\n\r\f\v]+')
+    match_phrases = re.compile(r'[,;:\(\)\[\]\{\}<>]+')
+    match_words = re.compile(r'[\w\-\'_/&]+')
     
     def __call__(self, text):
         '''
@@ -262,7 +262,8 @@ class Stemmer:
     is advisable; nltk.stem provides different algorithms for many languages)
     '''
 
-    match_contractions = re.compile('(\w+)\'(m|re|d|ve|s|ll|t)?')
+    match_contractions = re.compile(r'(\w+)\'(m|re|d|ve|s|ll|t)?')
+    match_hyphens = re.compile(r'\b[\-_]\b')
 
     def __init__(self, stemmer=None):
         '''
@@ -295,10 +296,14 @@ class Stemmer:
         @returns: the processed string
         '''
 
+        # delete hyphens and underscores
+        string = self.match_hyphens.sub('', string)
+        
         # get rid of contractions and possessive forms
         match = self.match_contractions.match(string)
-        if match: return match.group(1)
-        else: return string
+        if match: string = match.group(1)
+        
+        return string
     
 
 class Rater:
