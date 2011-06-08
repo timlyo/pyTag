@@ -10,7 +10,7 @@ Configuration
 =============
 
 Dependencies:
-python2.7, stemming, nltk (optional), lxml (optional), tkinter (optional)
+python2.7, stemming, nltk (optional), lxml (optional)
 
 You can install the stemming package with::
 

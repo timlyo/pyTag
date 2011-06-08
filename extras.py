@@ -43,8 +43,11 @@ class HTMLReader(UnicodeReader):
     def __call__(self, html):
         import lxml.html
 
-        text = lxml.html.fromstring(html).text_content().encode('utf-8')
-        return UnicodeReader.__call__(self, text)
+        text = lxml.html.fromstring(html).text_content()
+        if isinstance(text, unicode):
+            return UnicodeReader.__call__(self, text)
+        else:
+            return Reader.__call__(self, text)
 
     
 class SimpleReader(Reader):
