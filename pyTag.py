@@ -24,12 +24,13 @@
 
 """
 ======
-tagger
+pyTag
 ======
 
 Module for extracting tags from text documents.
                    
 Copyright (C) 2011 by Alessandro Presta
+Copyright (C) 2011 by Tim Maddison
 
 Configuration
 =============
@@ -56,11 +57,11 @@ Tagging a text document from Python::
 
 Running the module as a script::
 
-    $ ./tagger.py <text document(s) to tag>
+    $ ./pyTag.py <text document(s) to tag>
 
 Example::
 
-    $ ./tagger.py tests/*
+    $ ./pyTag.py tests/*
     Loading dictionary... 
     Tags for  tests/bbc1.txt :
     ['bin laden', 'obama', 'pakistan', 'killed', 'raid']

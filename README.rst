@@ -2,9 +2,10 @@
 tagger
 ======
 
-Module for extracting tags from text documents.
+Module for extracting tags from text documents. Forked from a project by Alessandro Presta and updated to python 3
                    
 Copyright (C) 2011 by Alessandro Presta
+Copyright (C) 2015 by Tim Maddison
 
 Configuration
 =============
