@@ -8,5 +8,6 @@ setup(
 	description='Generate tags from a body of text',
 	author='Tim Maddison',
 	url='https://github.com/timlyo/pyTag',
-	packages=["pyTag"]
+	packages=["pyTag"],
+	package_data={"pyTag": ["data/dict.pkl"]}
 )
