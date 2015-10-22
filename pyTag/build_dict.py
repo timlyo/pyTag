@@ -28,7 +28,7 @@ Usage: build_dict.py -o <output file> -s <stopwords file> <list of files>
 from __future__ import division
 
 from pyTag import Stemmer
-from extras import SimpleReader
+from pyTag.extras import SimpleReader
 
 
 def build_dict(corpus, stopwords=None, measure='IDF'):

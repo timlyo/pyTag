@@ -30,13 +30,13 @@ pyTag
 Module for extracting tags from text documents.
                    
 Copyright (C) 2011 by Alessandro Presta
-Copyright (C) 2011 by Tim Maddison
+Copyright (C) 2015 by Tim Maddison
 
 Configuration
 =============
 
 Dependencies:
-python2.7, stemming, nltk (optional), lxml (optional), tkinter (optional)
+python3.5, stemming, nltk (optional), lxml (optional), tkinter (optional)
 
 You can install the stemming package with::
 
@@ -455,7 +455,7 @@ if __name__ == '__main__':
 
 	if len(sys.argv) < 2:
 		print('No arguments given, running tests: ')
-		documents = glob.glob('tests/*')
+		documents = glob.glob('../tests/*')
 	else:
 		documents = sys.argv[1:]
 

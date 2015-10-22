@@ -19,9 +19,6 @@
 # THE SOFTWARE
 
 
-from pyTag import *
-
-
 class UnicodeReader(Reader):
     '''
     Reader subclass that converts Unicode strings to a close ASCII
@@ -104,7 +101,7 @@ def build_dict_from_nltk(output_file, corpus=None, stopwords=None,
                         on screen
     '''
     
-    from build_dict import build_dict
+    from pyTag.build_dict import build_dict
     import nltk
     import pickle
 
